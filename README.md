@@ -1,6 +1,10 @@
-<p align="center">
-  <img src="assets/photopea-wordmark.png" alt="Photopea" width="630">
-</p>
+<table align="center">
+  <tr>
+    <td align="center" bgcolor="#0d1117">
+      <img src="assets/photopea-wordmark.png" alt="Photopea" width="630">
+    </td>
+  </tr>
+</table>
 
 <h1 align="center">Photopea Full Width</h1>
 
