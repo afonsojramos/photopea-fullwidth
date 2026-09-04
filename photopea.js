@@ -1,12 +1,13 @@
 (() => {
   "use strict";
 
-  const EXTRA_WIDTH = 320;
+  const MAX_EXTRA_WIDTH = 800;
   const WARNING_PARTS = [
     "Something is changing our source code",
     "Many features will not work correctly",
   ];
   const initialWidth = window.innerWidth;
+  let extraWidth = 0;
 
   function containsKnownWarning(element) {
     const text = element.textContent?.replace(/\s+/g, " ").trim();
@@ -23,6 +24,8 @@
         !parent ||
         parent === document.body ||
         parent === document.documentElement ||
+        parent.matches?.(".app, .panelblock.mainblock") ||
+        parent.querySelector?.(".panelblock.mainblock") ||
         !containsKnownWarning(parent) ||
         parent.getBoundingClientRect().height > 250
       ) {
@@ -39,13 +42,18 @@
     const searchRoot = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
     if (!searchRoot) return;
 
-    const candidates = [];
+    const candidates = [...(searchRoot.querySelectorAll?.("div, span, p") || [])].reverse();
     if (searchRoot.matches?.("div, span, p")) candidates.push(searchRoot);
-    candidates.push(...(searchRoot.querySelectorAll?.("div, span, p") || []));
 
     for (const candidate of candidates) {
       if (candidate.isConnected && containsKnownWarning(candidate)) {
-        warningContainer(candidate).remove();
+        const container = warningContainer(candidate);
+        if (
+          !container.matches?.(".app, .panelblock.mainblock") &&
+          !container.querySelector?.(".panelblock.mainblock")
+        ) {
+          container.remove();
+        }
       }
     }
   }
@@ -57,7 +65,7 @@
   }
 
   function spoofedWidth() {
-    return realViewportWidth() + EXTRA_WIDTH;
+    return realViewportWidth() + extraWidth;
   }
 
   function installWidthSpoof() {
@@ -75,16 +83,30 @@
     }
   }
 
-  let relayoutQueued = false;
+  let adjustmentFrame = 0;
 
-  function relayout() {
+  function adjustWidth() {
     installWidthSpoof();
-    if (relayoutQueued) return;
+    const workspace = document.querySelector(".panelblock.mainblock");
+    if (!workspace) return;
 
-    relayoutQueued = true;
-    requestAnimationFrame(() => {
-      relayoutQueued = false;
-      window.dispatchEvent(new Event("resize"));
+    const error = Math.round(realViewportWidth() - workspace.getBoundingClientRect().right);
+    if (Math.abs(error) <= 6) return;
+
+    const nextExtraWidth = Math.max(0, Math.min(MAX_EXTRA_WIDTH, extraWidth + error));
+    if (Math.abs(nextExtraWidth - extraWidth) <= 2) return;
+
+    extraWidth = nextExtraWidth;
+    window.dispatchEvent(new Event("resize"));
+    scheduleAdjustment();
+  }
+
+  function scheduleAdjustment() {
+    if (adjustmentFrame) return;
+
+    adjustmentFrame = requestAnimationFrame(() => {
+      adjustmentFrame = 0;
+      adjustWidth();
     });
   }
 
@@ -93,8 +115,25 @@
 
   new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      removeKnownWarnings(mutation.target);
-      for (const node of mutation.addedNodes) removeKnownWarnings(node);
+      if (mutation.type === "characterData") {
+        removeKnownWarnings(mutation.target);
+        continue;
+      }
+
+      if (containsKnownWarning(mutation.target)) {
+        removeKnownWarnings(mutation.target);
+      }
+
+      for (const node of mutation.addedNodes) {
+        removeKnownWarnings(node);
+
+        if (
+          node.matches?.(".panelblock.mainblock") ||
+          node.querySelector?.(".panelblock.mainblock")
+        ) {
+          scheduleAdjustment();
+        }
+      }
     }
   }).observe(document, {
     childList: true,
@@ -103,14 +142,15 @@
   });
 
   for (const delay of [0, 50, 250, 1000, 2500, 5000]) {
-    setTimeout(relayout, delay);
+    setTimeout(scheduleAdjustment, delay);
   }
 
-  window.addEventListener("load", relayout, { once: true });
-  window.visualViewport?.addEventListener("resize", relayout, {
+  window.addEventListener("load", scheduleAdjustment, { once: true });
+  window.addEventListener("resize", scheduleAdjustment);
+  window.visualViewport?.addEventListener("resize", scheduleAdjustment, {
     passive: true,
   });
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) relayout();
+    if (!document.hidden) scheduleAdjustment();
   });
 })();

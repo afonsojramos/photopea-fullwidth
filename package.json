@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "check:photopea": "npm run build && node scripts/check-photopea.mjs",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
@@ -14,9 +15,10 @@
   },
   "devDependencies": {
     "oxfmt": "0.66.0",
-    "oxlint": "1.81.0"
+    "oxlint": "1.81.0",
+    "playwright": "1.62.1"
   },
   "engines": {
-    "node": ">=20"
+    "node": "^20.19.0 || >=22.12.0"
   }
 }
