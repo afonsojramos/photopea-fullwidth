@@ -5,8 +5,16 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "package": "npm run build && node scripts/package.mjs",
-    "verify": "npm run build && node scripts/verify.mjs"
+    "verify": "npm run fmt:check && npm run lint && npm run build && node scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "oxfmt": "0.66.0",
+    "oxlint": "1.81.0"
   },
   "engines": {
     "node": ">=20"

@@ -12,10 +12,7 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://photopea.com/*",
-        "https://www.photopea.com/*"
-      ],
+      "matches": ["https://photopea.com/*", "https://www.photopea.com/*"],
       "css": ["photopea.css"],
       "js": ["photopea.js"],
       "run_at": "document_start",

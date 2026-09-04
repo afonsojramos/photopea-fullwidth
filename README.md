@@ -8,12 +8,17 @@ This project is not affiliated with Photopea.
 
 ## Build
 
-Node.js 20 or newer and the system `zip` command are the only requirements.
+Node.js 20 or newer, npm, and the system `zip` command are required.
 
 ```sh
+npm ci
 npm run verify
 npm run package
 ```
+
+Run `npm run fmt` to format the project and `npm run lint` to run Oxlint. The
+`verify` command checks formatting and linting before it builds and validates the
+extension packages.
 
 The release files are written to `dist/`:
 

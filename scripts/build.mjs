@@ -4,9 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, "dist");
-const packageJson = JSON.parse(
-  await readFile(join(root, "package.json"), "utf8"),
-);
+const packageJson = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
 
 async function buildExtension(name, manifestPath) {
   const output = join(dist, name);

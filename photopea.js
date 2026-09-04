@@ -11,11 +11,7 @@
   function containsKnownWarning(element) {
     const text = element.textContent?.replace(/\s+/g, " ").trim();
 
-    return (
-      text &&
-      text.length < 300 &&
-      WARNING_PARTS.every((part) => text.includes(part))
-    );
+    return text && text.length < 300 && WARNING_PARTS.every((part) => text.includes(part));
   }
 
   function warningContainer(element) {
@@ -40,13 +36,12 @@
   }
 
   function removeKnownWarnings(root = document) {
-    const searchRoot =
-      root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
+    const searchRoot = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
     if (!searchRoot) return;
 
     const candidates = [];
     if (searchRoot.matches?.("div, span, p")) candidates.push(searchRoot);
-    candidates.push(...searchRoot.querySelectorAll?.("div, span, p") || []);
+    candidates.push(...(searchRoot.querySelectorAll?.("div, span, p") || []));
 
     for (const candidate of candidates) {
       if (candidate.isConnected && containsKnownWarning(candidate)) {
@@ -57,9 +52,7 @@
 
   function realViewportWidth() {
     return Math.round(
-      window.visualViewport?.width ||
-        document.documentElement?.clientWidth ||
-        initialWidth,
+      window.visualViewport?.width || document.documentElement?.clientWidth || initialWidth,
     );
   }
 
