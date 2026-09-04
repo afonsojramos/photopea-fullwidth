@@ -1,15 +1,69 @@
-# Photopea Full Width
+<table align="center">
+  <tr>
+    <td align="center" bgcolor="#0d1117">
+      <img src="assets/photopea-wordmark.png" alt="Photopea" width="630">
+    </td>
+  </tr>
+</table>
 
-Photopea Full Width reclaims the space reserved for Photopea's advertising column. It also hides the oversized home-screen logo and removes the specific source-code-modification warning caused by the width override.
+<h1 align="center">Photopea Full Width</h1>
 
-It does not remove ordinary dialogs, file errors, update notices, or premium prompts.
+<p align="center">
+  Give Photopea's editor the space reserved for its advertising column.
+</p>
 
-This project is not affiliated with Photopea.
+<p align="center">
+  <a href="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/ci.yml"><img src="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/photopea-compatibility.yml"><img src="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/photopea-compatibility.yml/badge.svg" alt="Photopea compatibility status"></a>
+  <a href="PRIVACY.md"><img src="https://img.shields.io/badge/privacy-no_data_collected-20a89e" alt="Privacy: no data collected"></a>
+</p>
 
-## Build
+Photopea Full Width removes the empty ad column so the editor fills your browser
+window. It also hides the large Photopea logo on the Home screen and removes the
+source-code warning caused by the width adjustment.
 
-Node.js 20.19.x or 22.12 and newer, npm, and the system `zip` command are
-required.
+The extension leaves normal dialogs, file errors, update notices, and premium
+prompts alone. It does not collect data. See the [privacy policy](PRIVACY.md) for
+details.
+
+## Install
+
+### Chrome and Chromium browsers
+
+1. Download `photopea-fullwidth-chromium.zip` from the
+   [latest release](https://github.com/afonsojramos/photopea-fullwidth/releases/latest).
+2. Extract the zip file.
+3. Open `chrome://extensions`.
+4. Enable **Developer mode**.
+5. Select **Load unpacked**, then choose the extracted folder.
+
+### Firefox
+
+1. Download `photopea-fullwidth-firefox.zip` from the
+   [latest release](https://github.com/afonsojramos/photopea-fullwidth/releases/latest).
+2. Extract the zip file.
+3. Open `about:debugging#/runtime/this-firefox`.
+4. Select **Load Temporary Add-on**.
+5. Choose `manifest.json` from the extracted folder.
+
+Firefox removes temporary add-ons when the browser closes.
+
+### Userscript
+
+Install [Tampermonkey](https://www.tampermonkey.net/) or
+[Violentmonkey](https://violentmonkey.github.io/), then install the
+[latest userscript](https://github.com/afonsojramos/photopea-fullwidth/releases/latest/download/photopea-fullwidth.user.js).
+
+## What it changes
+
+- Expands the editor into Photopea's reserved ad space.
+- Adapts when you resize the browser window.
+- Hides the large logo on the Home screen.
+- Removes only the source-code warning caused by the width adjustment.
+
+## Development
+
+You need Node.js 20.19.x or 22.12 and newer, npm, and the system `zip` command.
 
 ```sh
 npm ci
@@ -17,49 +71,37 @@ npm run verify
 npm run package
 ```
 
-Run `npm run fmt` to format the project and `npm run lint` to run Oxlint. The
-`verify` command checks formatting and linting before it builds and validates the
-extension packages.
+`npm run package` writes these release files to `dist/`:
 
-## Photopea compatibility
+- `photopea-fullwidth-chromium.zip`
+- `photopea-fullwidth-firefox.zip`
+- `photopea-fullwidth.user.js`
 
-The `Photopea compatibility` workflow loads the built Chromium extension against
-the live Photopea site on the first day of each month. It fails if Photopea
-changes the workspace or home-logo markup, if the width override stops filling
-the viewport after growing or shrinking the window, or if warning removal stops
-working. You can also run it manually from GitHub Actions.
+Run `npm run fmt` to format the project. Run `npm run lint` to check it with
+Oxlint.
 
-For a local check, install Playwright's Chromium build once and run the test:
+### Check live Photopea compatibility
+
+The monthly compatibility workflow loads the built Chromium extension on the
+live Photopea site. It checks the editor width, browser resizing, logo hiding,
+and warning removal. Run the same check locally with these commands:
 
 ```sh
 npx playwright install --no-shell chromium
 npm run check:photopea
 ```
 
-The release files are written to `dist/`:
+### Make a release
 
-- `photopea-fullwidth-chromium.zip`
-- `photopea-fullwidth-firefox.zip`
-- `photopea-fullwidth.user.js`
-
-## Install locally
-
-For Chrome, run `npm run build`, open `chrome://extensions`, enable Developer mode, choose Load unpacked, and select `dist/chromium`.
-
-For Firefox, run `npm run build`, open `about:debugging#/runtime/this-firefox`, choose Load Temporary Add-on, and select `dist/firefox/manifest.json`.
-
-The userscript works with Tampermonkey and Violentmonkey. Install `dist/photopea-fullwidth.user.js` after building.
-
-## Releases
-
-Release Please reads Conventional Commit messages and opens a release pull request against `main`.
+Release Please reads Conventional Commit messages and opens a release pull
+request against `main`:
 
 - `fix:` creates a patch release.
 - `feat:` creates a minor release.
 - `feat!:` or a `BREAKING CHANGE:` footer creates a major release.
 
-Merging the release pull request creates the GitHub release and uploads all three packages. The workflow keeps `package.json` and both browser manifests on the same version. The userscript gets that version during the build.
+Merge the release pull request to create the GitHub release and upload all three
+packages. The workflow keeps the package, Chromium extension, Firefox extension,
+and userscript versions in sync.
 
-Before the first run, enable read and write workflow permissions and allow GitHub Actions to create pull requests in the repository settings.
-
-Upload the Chromium zip to the Chrome Web Store and the Firefox zip to Mozilla Add-ons. Each store handles signing after submission. The userscript release asset has stable update URLs that point to the latest GitHub release.
+This project is not affiliated with Photopea.
