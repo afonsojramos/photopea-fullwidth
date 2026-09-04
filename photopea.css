@@ -1,0 +1,3 @@
+.panelblock.mainblock .storageset img[style*="drop-shadow"] {
+  display: none !important;
+}

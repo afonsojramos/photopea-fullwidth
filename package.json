@@ -1,0 +1,14 @@
+{
+  "name": "photopea-fullwidth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "package": "npm run build && node scripts/package.mjs",
+    "verify": "npm run build && node scripts/verify.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
