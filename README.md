@@ -63,22 +63,24 @@ Install [Tampermonkey](https://www.tampermonkey.net/) or
 
 ## Development
 
-You need Node.js 20.19.x or 22.12 and newer, npm, and the system `zip` command.
+You need [Mise](https://mise.jdx.dev/) and the system `zip` command. Mise reads
+`mise.toml` to install the same Node.js and pnpm versions used in CI.
 
 ```sh
-npm ci
-npm run verify
-npm run package
+mise install
+mise exec -- pnpm install --frozen-lockfile
+mise exec -- pnpm run verify
+mise exec -- pnpm run package
 ```
 
-`npm run package` writes these release files to `dist/`:
+`mise exec -- pnpm run package` writes these release files to `dist/`:
 
 - `photopea-fullwidth-chromium.zip`
 - `photopea-fullwidth-firefox.zip`
 - `photopea-fullwidth.user.js`
 
-Run `npm run fmt` to format the project. Run `npm run lint` to check it with
-Oxlint.
+Run `mise exec -- pnpm run fmt` to format the project. Run
+`mise exec -- pnpm run lint` to check it with Oxlint.
 
 ### Check live Photopea compatibility
 
@@ -87,8 +89,8 @@ live Photopea site. It checks the editor width, browser resizing, logo hiding,
 and warning removal. Run the same check locally with these commands:
 
 ```sh
-npx playwright install --no-shell chromium
-npm run check:photopea
+mise exec -- pnpm exec playwright install --no-shell chromium
+mise exec -- pnpm run check:photopea
 ```
 
 ### Make a release
