@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "capture:store": "npm run build && node scripts/capture-store-assets.mjs",
     "check:photopea": "npm run build && node scripts/check-photopea.mjs",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
