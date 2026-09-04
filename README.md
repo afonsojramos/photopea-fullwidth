@@ -8,11 +8,32 @@ This project is not affiliated with Photopea.
 
 ## Build
 
-Node.js 20 or newer and the system `zip` command are the only requirements.
+Node.js 20.19.x or 22.12 and newer, npm, and the system `zip` command are
+required.
 
 ```sh
+npm ci
 npm run verify
 npm run package
+```
+
+Run `npm run fmt` to format the project and `npm run lint` to run Oxlint. The
+`verify` command checks formatting and linting before it builds and validates the
+extension packages.
+
+## Photopea compatibility
+
+The `Photopea compatibility` workflow loads the built Chromium extension against
+the live Photopea site on the first day of each month. It fails if Photopea
+changes the workspace or home-logo markup, if the width override stops filling
+the viewport after growing or shrinking the window, or if warning removal stops
+working. You can also run it manually from GitHub Actions.
+
+For a local check, install Playwright's Chromium build once and run the test:
+
+```sh
+npx playwright install --no-shell chromium
+npm run check:photopea
 ```
 
 The release files are written to `dist/`:

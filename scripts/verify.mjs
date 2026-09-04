@@ -11,10 +11,7 @@ const packageJson = await readJson(join(root, "package.json"));
 const chromium = await readJson(join(root, "dist", "chromium", "manifest.json"));
 const firefox = await readJson(join(root, "dist", "firefox", "manifest.json"));
 const source = await readFile(join(root, "photopea.js"), "utf8");
-const userscript = await readFile(
-  join(root, "dist", "photopea-fullwidth.user.js"),
-  "utf8",
-);
+const userscript = await readFile(join(root, "dist", "photopea-fullwidth.user.js"), "utf8");
 
 assert.equal(chromium.version, packageJson.version);
 assert.equal(firefox.version, packageJson.version);
@@ -31,19 +28,14 @@ assert.match(source, /new MutationObserver/);
 
 for (const target of ["chromium", "firefox"]) {
   for (const size of iconSizes) {
-    const icon = await readFile(
-      join(root, "dist", target, "icons", `icon${size}.png`),
-    );
+    const icon = await readFile(join(root, "dist", target, "icons", `icon${size}.png`));
     assert.equal(icon.toString("ascii", 1, 4), "PNG");
     assert.equal(icon.readUInt32BE(16), size);
     assert.equal(icon.readUInt32BE(20), size);
   }
 }
 
-for (const path of [
-  join(root, "photopea.js"),
-  join(root, "dist", "photopea-fullwidth.user.js"),
-]) {
+for (const path of [join(root, "photopea.js"), join(root, "dist", "photopea-fullwidth.user.js")]) {
   const result = spawnSync(process.execPath, ["--check", path], {
     encoding: "utf8",
   });
