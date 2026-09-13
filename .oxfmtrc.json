@@ -1,1 +1,8 @@
-{}
+{
+  "ignorePatterns": [
+    ".release-please-manifest.json",
+    "CHANGELOG.md",
+    "firefox/manifest.json",
+    "manifest.json"
+  ]
+}
