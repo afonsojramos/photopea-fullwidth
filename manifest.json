@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Photopea Full Width",
   "description": "Removes Photopea's ad sidebar, expands the editor to full width, hides its Home screen logo, and removes one related warning.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minimum_chrome_version": "111",
   "icons": {
     "16": "icons/icon16.png",
@@ -12,9 +12,16 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://photopea.com/*", "https://www.photopea.com/*"],
-      "css": ["photopea.css"],
-      "js": ["photopea.js"],
+      "matches": [
+        "https://photopea.com/*",
+        "https://www.photopea.com/*"
+      ],
+      "css": [
+        "photopea.css"
+      ],
+      "js": [
+        "photopea.js"
+      ],
       "run_at": "document_start",
       "world": "MAIN"
     }

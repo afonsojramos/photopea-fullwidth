@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/afonsojramos/photopea-fullwidth/compare/v1.0.0...v1.0.1) (2026-09-13)
+
+
+### Bug Fixes
+
+* describe Photopea ad removal in store metadata ([d5a50c2](https://github.com/afonsojramos/photopea-fullwidth/commit/d5a50c209d6f53df6bf14cda0299b4fd8bfc0151))
+* let release PRs pass formatting ([b8f216a](https://github.com/afonsojramos/photopea-fullwidth/commit/b8f216a31bbae186c80106c77782ce517014fc87))
+
 ## 1.0.0 (2026-09-04)
 
 ### Features
