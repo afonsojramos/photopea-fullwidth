@@ -22,7 +22,7 @@ function userscriptHeader(version) {
 // @name         Photopea Full Width
 // @namespace    https://github.com/afonsojramos/photopea-fullwidth
 // @version      ${version}
-// @description  Reclaim Photopea's reserved ad column, hide its home-screen logo, and remove its source-code warning.
+// @description  Remove Photopea's ad sidebar, expand the editor to full width, hide its Home screen logo, and remove one related warning.
 // @match        https://photopea.com/*
 // @match        https://www.photopea.com/*
 // @run-at       document-start

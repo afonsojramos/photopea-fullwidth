@@ -9,7 +9,7 @@
 <h1 align="center">Photopea Full Width</h1>
 
 <p align="center">
-  Give Photopea's editor the space reserved for its advertising column.
+  Remove Photopea's ad sidebar and use the editor at full browser width.
 </p>
 
 <p align="center">
@@ -23,9 +23,9 @@
   <a href="PRIVACY.md"><img src="https://img.shields.io/badge/privacy-no_data_collected-20a89e" alt="Privacy: no data collected"></a>
 </p>
 
-Photopea Full Width removes the empty ad column so the editor fills your browser
-window. It also hides the large Photopea logo on the Home screen and removes the
-source-code warning caused by the width adjustment.
+Photopea Full Width removes Photopea's ad sidebar so the editor fills your
+browser window. It also hides the large Photopea logo on the Home screen and
+removes the source-code warning caused by the width adjustment.
 
 The extension leaves normal dialogs, file errors, update notices, and premium
 prompts alone. It does not collect data. See the [privacy policy](PRIVACY.md) for
@@ -66,7 +66,7 @@ Install [Tampermonkey](https://www.tampermonkey.net/) or
 
 ## What it changes
 
-- Expands the editor into Photopea's reserved ad space.
+- Removes Photopea's ad sidebar and expands the editor into that space.
 - Adapts when you resize the browser window.
 - Hides the large logo on the Home screen.
 - Removes only the source-code warning caused by the width adjustment.

@@ -8,14 +8,14 @@ Photopea Full Width
 
 ## Summary
 
-Give Photopea's editor the space reserved for its advertising column.
+Remove Photopea's ad sidebar and use the editor at full browser width.
 
 ## Description
 
-Photopea Full Width removes the empty advertising column so the editor fills
-your browser window. It adapts when you resize the window, hides the large logo
-on Photopea's Home screen, and removes only the source-code warning caused by
-the width adjustment.
+Photopea Full Width removes Photopea's ad sidebar so the editor fills your
+browser window. It adapts when you resize the window, hides the large logo on
+Photopea's Home screen, and removes only the source-code warning caused by the
+width adjustment.
 
 The extension runs only on photopea.com. It leaves normal dialogs, file errors,
 update notices, and premium prompts alone.
