@@ -13,6 +13,11 @@
 </p>
 
 <p align="center">
+  <a href="https://chromewebstore.google.com/detail/photopea-full-width/inmdbehofpjneholepkfmckkbdnghbpj"><img src="https://img.shields.io/chrome-web-store/v/inmdbehofpjneholepkfmckkbdnghbpj?label=Chrome%20Web%20Store&amp;logo=googlechrome&amp;logoColor=white" alt="Install from the Chrome Web Store"></a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/photopea-full-width/"><img src="https://img.shields.io/amo/v/photopea-full-width?label=Firefox%20Add-ons&amp;logo=firefoxbrowser&amp;logoColor=white" alt="Install from Firefox Add-ons"></a>
+</p>
+
+<p align="center">
   <a href="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/ci.yml"><img src="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
   <a href="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/photopea-compatibility.yml"><img src="https://github.com/afonsojramos/photopea-fullwidth/actions/workflows/photopea-compatibility.yml/badge.svg" alt="Photopea compatibility status"></a>
   <a href="PRIVACY.md"><img src="https://img.shields.io/badge/privacy-no_data_collected-20a89e" alt="Privacy: no data collected"></a>
@@ -28,7 +33,12 @@ details.
 
 ## Install
 
-### Chrome and Chromium browsers
+- [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/photopea-full-width/inmdbehofpjneholepkfmckkbdnghbpj)
+- [Install from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/photopea-full-width/)
+
+### Install an unreleased build
+
+For Chrome and Chromium browsers:
 
 1. Download `photopea-fullwidth-chromium.zip` from the
    [latest release](https://github.com/afonsojramos/photopea-fullwidth/releases/latest).
@@ -37,7 +47,7 @@ details.
 4. Enable **Developer mode**.
 5. Select **Load unpacked**, then choose the extracted folder.
 
-### Firefox
+For Firefox:
 
 1. Download `photopea-fullwidth-firefox.zip` from the
    [latest release](https://github.com/afonsojramos/photopea-fullwidth/releases/latest).
